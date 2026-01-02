@@ -12,6 +12,14 @@ export enum UserRole {
   ADMIN = 'Admin'
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  companyCode: string;
+}
+
 export interface Reading {
   tenantId: string;
   meterId: string;
@@ -52,6 +60,11 @@ export interface AVVNLBill {
   uploaded: boolean;
 }
 
+export interface DbConfig {
+  apiUrl: string;
+  apiKey: string;
+}
+
 export interface BillingPeriod {
   month: string;
   year: number;
@@ -61,4 +74,6 @@ export interface BillingPeriod {
   solar: SolarData;
   dgSets: DGSetData[];
   bill: AVVNLBill;
+  dbConfig?: DbConfig;
+  companyCode: string;
 }

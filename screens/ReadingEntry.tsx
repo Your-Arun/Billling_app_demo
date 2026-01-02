@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BillingPeriod, Reading, WorkflowStatus } from '../types';
@@ -70,18 +69,19 @@ const ReadingEntry: React.FC<{ period: BillingPeriod, setPeriod: React.Dispatch<
     const diff = val - reading.opening;
     const units = diff * reading.meterCT;
     
+    // Fix: Explicitly cast the updated reading object to Reading type to avoid flag widening to string
     setPeriod(prev => {
       const updatedReadings = prev.readings.map(r => 
         r.tenantId === tenantId 
-        ? { 
+        ? ({ 
             ...r, 
             closing: val, 
             units, 
             remarks, 
             photo,
             isCaptured: true,
-            flag: units > 5000 ? 'Spike' : (units === 0 && val >= reading.opening ? 'Zero' : 'Normal') 
-          } 
+            flag: (units > 5000 ? 'Spike' : (units === 0 && val >= reading.opening ? 'Zero' : 'Normal')) as 'Spike' | 'Zero' | 'Normal'
+          } as Reading)
         : r
       );
 
