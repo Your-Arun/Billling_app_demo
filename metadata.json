@@ -1,0 +1,7 @@
+{
+  "name": "ElectraBill - Electricity & Tenant Billing",
+  "description": "A comprehensive utility management system for property owners to manage main meter readings, solar generation, DG sets, and multi-tenant billing with automated reconciliation.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
